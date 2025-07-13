@@ -85,7 +85,7 @@ const PropertySearch = () => {
       property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       property.locality.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesLocality = selectedLocality === "" || property.locality === selectedLocality;
+    const matchesLocality = selectedLocality === "" || selectedLocality === "all" || property.locality === selectedLocality;
     
     return matchesSearch && matchesLocality;
   });
@@ -122,7 +122,7 @@ const PropertySearch = () => {
                   <SelectValue placeholder="Select locality" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Localities</SelectItem>
+                  <SelectItem value="all">All Localities</SelectItem>
                   {localities.map((locality) => (
                     <SelectItem key={locality} value={locality}>
                       {locality}
@@ -139,7 +139,7 @@ const PropertySearch = () => {
                   <SelectValue placeholder="Select budget" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Any Budget</SelectItem>
+                  <SelectItem value="all">Any Budget</SelectItem>
                   <SelectItem value="30-50">₹30L - ₹50L</SelectItem>
                   <SelectItem value="50-75">₹50L - ₹75L</SelectItem>
                   <SelectItem value="75-100">₹75L - ₹1Cr</SelectItem>
@@ -155,7 +155,7 @@ const PropertySearch = () => {
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Types</SelectItem>
+                  <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="2bhk">2 BHK</SelectItem>
                   <SelectItem value="3bhk">3 BHK</SelectItem>
                   <SelectItem value="4bhk">4 BHK</SelectItem>
