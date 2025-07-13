@@ -1,94 +1,60 @@
+import { Building2, TrendingUp, User, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Building2, 
-  User, 
-  Bell, 
-  Settings, 
-  LogOut,
-  ChevronDown 
-} from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
+  const { user, signOut } = useAuth();
+
   return (
-    <header className="bg-card border-b border-border shadow-soft">
+    <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo and Title */}
-          <div className="flex items-center gap-3">
-            <div className="bg-gradient-primary p-2 rounded-lg">
-              <Building2 className="h-6 w-6 text-primary-foreground" />
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-lg">
+              <Building2 className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">
-                Hyderabad Property Seer
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                Real Estate Analytics & Investment Intelligence
-              </p>
+              <h1 className="text-xl font-bold text-foreground">Hyderabad Property Seer</h1>
+              <p className="text-sm text-muted-foreground">Real Estate Analytics Platform</p>
             </div>
-          </div>
-
-          {/* Right Side - Notifications and User Menu */}
-          <div className="flex items-center gap-4">
-            {/* Market Status */}
-            <div className="hidden md:flex items-center gap-2">
-              <Badge className="bg-accent/20 text-accent">
-                Market: Bullish
-              </Badge>
-              <span className="text-sm text-muted-foreground">
-                Last updated: 2 mins ago
-              </span>
+          </Link>
+          
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-sm">
+              <TrendingUp className="w-4 h-4 text-primary" />
+              <span className="text-muted-foreground">Live Market Data</span>
             </div>
-
-            {/* Notifications */}
-            <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                3
-              </span>
-            </Button>
-
-            {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center gap-2">
-                  <div className="bg-primary text-primary-foreground rounded-full h-8 w-8 flex items-center justify-center">
-                    <User className="h-4 w-4" />
-                  </div>
-                  <span className="hidden md:block text-sm font-medium">
-                    John Investor
-                  </span>
-                  <ChevronDown className="h-3 w-3" />
+            
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                    <User className="w-4 h-4" />
+                    <span>{user.email}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={signOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" size="sm">
+                  <User className="w-4 h-4 mr-2" />
+                  Sign In
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem>
-                  <User className="h-4 w-4 mr-2" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="h-4 w-4 mr-2" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Bell className="h-4 w-4 mr-2" />
-                  Notifications
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-destructive">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ import {
   Search, 
   Target, 
   Activity,
-  Home 
+  Home,
+  Globe
 } from "lucide-react";
 
 interface NavigationProps {
@@ -21,6 +22,12 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
       label: "Market Overview",
       icon: Home,
       description: "Key metrics and trends"
+    },
+    {
+      id: "scraper",
+      label: "Property Scraper",
+      icon: Globe,
+      description: "Scrape MagicBricks properties"
     },
     {
       id: "trends",

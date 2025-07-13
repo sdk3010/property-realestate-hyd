@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import MarketOverview from "@/components/MarketOverview";
@@ -7,9 +8,19 @@ import PriceForecast from "@/components/PriceForecast";
 import MarketSentiment from "@/components/MarketSentiment";
 import InvestmentRecommendations from "@/components/InvestmentRecommendations";
 import PropertySearch from "@/components/PropertySearch";
+import PropertyScraper from "@/components/PropertyScraper";
+import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !user && (activeTab === "scraper")) {
+      navigate("/auth");
+    }
+  }, [user, loading, activeTab, navigate]);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -23,6 +34,8 @@ const Index = () => {
             </div>
           </div>
         );
+      case "scraper":
+        return <PropertyScraper />;
       case "trends":
         return (
           <div className="space-y-8">

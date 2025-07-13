@@ -14,7 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scraped_properties: {
+        Row: {
+          amenities: string[] | null
+          bathrooms: number | null
+          created_at: string
+          description: string | null
+          developer: string | null
+          furnishing_status: string | null
+          id: string
+          images: string[] | null
+          investment_rating: string | null
+          latitude: number | null
+          location: string | null
+          longitude: number | null
+          possession_date: string | null
+          price: number | null
+          price_per_sqft: number | null
+          sentiment_score: number | null
+          super_area: number | null
+          title: string | null
+          transaction_type: string | null
+          updated_at: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          amenities?: string[] | null
+          bathrooms?: number | null
+          created_at?: string
+          description?: string | null
+          developer?: string | null
+          furnishing_status?: string | null
+          id?: string
+          images?: string[] | null
+          investment_rating?: string | null
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          possession_date?: string | null
+          price?: number | null
+          price_per_sqft?: number | null
+          sentiment_score?: number | null
+          super_area?: number | null
+          title?: string | null
+          transaction_type?: string | null
+          updated_at?: string
+          url: string
+          user_id: string
+        }
+        Update: {
+          amenities?: string[] | null
+          bathrooms?: number | null
+          created_at?: string
+          description?: string | null
+          developer?: string | null
+          furnishing_status?: string | null
+          id?: string
+          images?: string[] | null
+          investment_rating?: string | null
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          possession_date?: string | null
+          price?: number | null
+          price_per_sqft?: number | null
+          sentiment_score?: number | null
+          super_area?: number | null
+          title?: string | null
+          transaction_type?: string | null
+          updated_at?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
